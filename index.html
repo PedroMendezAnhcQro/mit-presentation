@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerarquía DIKW y Práctica Golfito - Universidad Anáhuac</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        anahuac: {
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            card: '#1a1a1a',
+                            border: '#2e2e2e',
+                            orange: '#ff6b00',
+                            orangeHover: '#e05d00',
+                            gold: '#d4af37',
+                            goldLight: '#f3e5ab'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js para gráficas modernas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0a;
+            color: #f3f4f6;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #fff2b2 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .orange-glow {
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.15);
+        }
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .slide-hidden {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .slide-active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-anahuac-black selection:bg-anahuac-orange selection:text-white">
+
+    <!-- HEADER / BARRA SUPERIOR -->
+    <header class="w-full bg-anahuac-dark border-b border-anahuac-border py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-anahuac-orange to-anahuac-gold flex items-center justify-center font-bold text-black shadow-lg">
+                UA
+            </div>
+            <div>
+                <h1 class="text-sm md:text-base font-bold tracking-wider gold-gradient-text">UNIVERSIDAD ANÁHUAC QUERÉTARO</h1>
+                <p class="text-xs text-gray-400">Analítica para la Toma de Decisiones</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button onclick="goToSlide(1)" class="px-3 py-1.5 bg-anahuac-card hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-anahuac-gold transition flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-house"></i> Inicio
+            </button>
+            <span id="slide-counter" class="text-xs font-medium px-3 py-1.5 bg-anahuac-card rounded-lg text-gray-300 border border-anahuac-border">
+                Diapositiva 1 / 13
+            </span>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DE DIAPOSITIVAS -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8 max-w-7xl mx-auto w-full">
+
+        <!-- DIAPOSITIVA 1: Portada -->
+        <div id="slide-1" class="slide-active flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border orange-glow relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-anahuac-orange/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="space-y-4">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-anahuac-orange/10 text-anahuac-orange border border-anahuac-orange/30">
+                    Maestría en Ingeniería y Transformación
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight">
+                    Jerarquía DIKW y Análisis de Práctica <span class="text-anahuac-orange">"Golfito"</span>
+                </h2>
+                <p class="text-lg md:text-xl text-anahuac-gold font-medium">
+                    Analítica para la Toma de Decisiones
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 border-t border-b border-anahuac-border py-6">
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Profesores</h3>
+                    <p class="text-sm font-medium text-gray-200">Alberto González Ruiz</p>
+                    <p class="text-sm font-medium text-gray-200">Samael Flores Ortega</p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Integrantes del Equipo</h3>
+                    <p class="text-sm font-medium text-gray-200">Erick Lopez | Luis Romero | Jorge Gomez | Israel Camacho | Pedro Mendez</p>
+                    <p class="text-xs text-gray-500 mt-1">17 de octubre de 2026</p>
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button onclick="nextSlide()" class="px-6 py-3 bg-gradient-to-r from-anahuac-orange to-amber-600 hover:from-amber-600 hover:to-anahuac-orange text-white font-semibold rounded-xl transition flex items-center gap-2 shadow-lg">
+                    Comenzar Presentación <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 2: Pirámide DIKW Interactiva -->
+        <div id="slide-2" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Estructura Conceptual</span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mt-1">Pirámide DIKW (Taudux / Referencia Científica)</h2>
+                <p class="text-sm text-gray-400 mt-1">Da clic en cualquier nivel de la pirámide para explorar su detalle conceptual y ejemplos prácticos.</p>
+            </div>
+
+            <div class="flex flex-col items-center justify-center my-6 space-y-3">
+                <!-- Sabiduría -->
+                <div onclick="goToSlide(6)" class="w-full max-w-xl bg-gradient-to-r from-amber-900/40 to-anahuac-card hover:border-anahuac-gold border border-anahuac-border p-4 rounded-xl cursor-pointer transition transform hover:scale-102 flex justify-between items-center group shadow-md">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-anahuac-gold flex items-center justify-center font-bold">4</span>
+                        <div>
+                            <h4 class="font-bold text-white group-hover:text-anahuac-gold transition">Sabiduría (Wisdom)</h4>
+                            <p class="text-xs text-gray-400">Juicio ético, estratégico y sostenibilidad a largo plazo</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-anahuac-gold"></i>
+                </div>
+
+                <!-- Conocimiento -->
+                <div onclick="goToSlide(5)" class="w-full max-w-lg bg-gradient-to-r from-orange-900/30 to-anahuac-card hover:border-anahuac-orange border border-anahuac-border p-4 rounded-xl cursor-pointer transition transform hover:scale-102 flex justify-between items-center group shadow-md">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-lg bg-anahuac-orange/20 text-anahuac-orange flex items-center justify-center font-bold">3</span>
+                        <div>
+                            <h4 class="font-bold text-white group-hover:text-anahuac-orange transition">Conocimiento (Knowledge)</h4>
+                            <p class="text-xs text-gray-400">Patrones, comprensión y aplicación práctica</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-anahuac-orange"></i>
+                </div>
+
+                <!-- Información -->
+                <div onclick="goToSlide(4)" class="w-full max-w-md bg-gradient-to-r from-blue-900/20 to-anahuac-card hover:border-blue-500 border border-anahuac-border p-4 rounded-xl cursor-pointer transition transform hover:scale-102 flex justify-between items-center group shadow-md">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">2</span>
+                        <div>
+                            <h4 class="font-bold text-white group-hover:text-blue-400 transition">Información (Information)</h4>
+                            <p class="text-xs text-gray-400">Datos estructurados en un contexto específico</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-blue-400"></i>
+                </div>
+
+                <!-- Datos -->
+                <div onclick="goToSlide(3)" class="w-full max-w-xs bg-gradient-to-r from-gray-800 to-anahuac-card hover:border-gray-400 border border-anahuac-border p-4 rounded-xl cursor-pointer transition transform hover:scale-102 flex justify-between items-center group shadow-md">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-lg bg-gray-700 text-gray-300 flex items-center justify-center font-bold">1</span>
+                        <div>
+                            <h4 class="font-bold text-white group-hover:text-gray-200 transition">Datos (Data)</h4>
+                            <p class="text-xs text-gray-400">Hechos y números sin procesar</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-gray-200"></i>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 3: Datos -->
+        <div id="slide-3" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Nivel 1 de la Jerarquía</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Datos: Definición y Ejemplo</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4">
+                    <h3 class="text-anahuac-gold font-bold text-lg"><i class="fa-solid fa-circle-info mr-2"></i>Características</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Los datos son la base de la pirámide. Consisten en observaciones objetivas y crudas sobre eventos o símbolos sin un significado contextual intrínseco. Por sí solos, no explican el porqué ni sugieren ninguna acción.
+                    </p>
+                </div>
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-anahuac-orange font-bold text-lg"><i class="fa-solid fa-terminal mr-2"></i>Ejemplo Práctico</h3>
+                        <p class="text-sm text-gray-300 mt-2">Números sueltos de temperatura registrados por un sensor:</p>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-lg border border-anahuac-border font-mono text-xl text-center text-anahuac-gold">
+                        "28, 30, 29"
+                    </div>
+                    <p class="text-xs text-gray-500">Valores numéricos aislados carentes de unidades o marco temporal.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 4: Información -->
+        <div id="slide-4" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-blue-400 uppercase">Nivel 2 de la Jerarquía</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Información: Contexto y Estructura</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4">
+                    <h3 class="text-anahuac-gold font-bold text-lg"><i class="fa-solid fa-brain mr-2"></i>Definición y Contexto</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        La información se obtiene al dotar a los datos de contexto, estructura y significado. Responde a preguntas como "¿quién?", "¿qué?", "¿dónde?" y "¿cuándo?", permitiendo estructurar los hechos para que cobren sentido útil.
+                    </p>
+                </div>
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-blue-400 font-bold text-lg"><i class="fa-solid fa-file-lines mr-2"></i>Ejemplo Transformado</h3>
+                        <p class="text-sm text-gray-300 mt-2">Los datos anteriores enriquecidos con unidades y marco temporal:</p>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-lg border border-anahuac-border text-center text-blue-300 text-sm font-medium">
+                        "La temperatura promedio en la Ciudad de México esta semana es de 29°C"
+                    </div>
+                    <p class="text-xs text-gray-500">Los números ahora tienen significado, ubicación geográfica y periodo temporal.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 5: Conocimiento -->
+        <div id="slide-5" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Nivel 3 de la Jerarquía</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Conocimiento: Patrones y Aplicación</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4">
+                    <h3 class="text-anahuac-gold font-bold text-lg"><i class="fa-solid fa-lightbulb mr-2"></i>Definición y Patrones</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        El conocimiento representa la comprensión de patrones, relaciones y principios detrás de la información. Responde al "¿cómo?" y permite aplicar el aprendizaje acumulado a situaciones operativas o de toma de decisiones.
+                    </p>
+                </div>
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-anahuac-orange font-bold text-lg"><i class="fa-solid fa-gears mr-2"></i>Ejemplo Práctico de Acción</h3>
+                        <p class="text-sm text-gray-300 mt-2">Uso operativo basado en la tendencia observada:</p>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-lg border border-anahuac-border text-center text-anahuac-orange text-sm font-medium">
+                        "Como la temperatura subirá por la tarde, debemos activar el ventilador a las 3 PM"
+                    </div>
+                    <p class="text-xs text-gray-500">Se vincula una causa-efecto para ejecutar una acción automatizada o rutinaria.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 6: Sabiduría -->
+        <div id="slide-6" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-gold uppercase">Nivel 4 de la Jerarquía</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Sabiduría: Juicio Ético y Estratégico</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4">
+                    <h3 class="text-anahuac-gold font-bold text-lg"><i class="fa-solid fa-scale-balanced mr-2"></i>Definición y Visión</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        La sabiduría es el nivel más alto. Implica la evaluación crítica, el juicio ético, la visión a largo plazo y la comprensión de los valores humanos y ambientales detrás de las decisiones estratégicas. Responde al "¿por qué hacerlo de forma sostenible?".
+                    </p>
+                </div>
+                <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-anahuac-gold font-bold text-lg"><i class="fa-solid fa-seedling mr-2"></i>Ejemplo Práctico Estratégico</h3>
+                        <p class="text-sm text-gray-300 mt-2">Solución estructural e integral a largo plazo:</p>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-lg border border-anahuac-border text-center text-anahuac-gold text-sm font-medium">
+                        "Implementar techos verdes y ventilación natural en el edificio para reducir el calor a largo plazo de forma sostenible"
+                    </div>
+                    <p class="text-xs text-gray-500">Transformación sustentable que trasciende la simple operación correctiva.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 7: Práctica Golfito - Introducción y Objetivos -->
+        <div id="slide-7" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Práctica Golfito (QC Story)</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Diseño y Datos Iniciales</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+                <div class="bg-anahuac-dark p-5 rounded-xl border border-anahuac-border space-y-3">
+                    <h3 class="text-anahuac-gold font-bold text-sm"><i class="fa-solid fa-bullseye mr-2"></i>Objetivo y Materiales</h3>
+                    <p class="text-xs text-gray-300">Analizar la capacidad del simulador respecto a una distancia objetivo de <strong>130 ± 10 cm</strong> y una meta de <strong>Cp > 1.33</strong>.</p>
+                    <p class="text-xs text-gray-400"><strong>Equipo:</strong> Simulador de acrílico, martillo, birlos, tuercas, rondanas, llave mixta, 5 pelotas, alfombra y flexómetro.</p>
+                </div>
+                <div class="bg-anahuac-dark p-5 rounded-xl border border-anahuac-border flex flex-col justify-center">
+                    <h3 class="text-anahuac-orange font-bold text-sm mb-2"><i class="fa-solid fa-table mr-2"></i>Indicadores Iniciales (Resumen)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-gray-300">
+                            <thead class="bg-anahuac-card text-anahuac-gold border-b border-anahuac-border">
+                                <tr>
+                                    <th class="p-2">Tirador</th>
+                                    <th class="p-2">Media</th>
+                                    <th class="p-2">Desv. Est.</th>
+                                    <th class="p-2">Cp</th>
+                                    <th class="p-2">PPM Est.</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-anahuac-border">
+                                <tr><td class="p-2 font-medium">Pedro</td><td class="p-2">131.70</td><td class="p-2">4.11</td><td class="p-2 text-anahuac-gold font-bold">0.81</td><td class="p-2">23,957</td></tr>
+                                <tr><td class="p-2 font-medium">Jorge</td><td class="p-2">127.80</td><td class="p-2">5.12</td><td class="p-2">0.65</td><td class="p-2">72,243</td></tr>
+                                <tr><td class="p-2 font-medium">Luis</td><td class="p-2">129.60</td><td class="p-2">9.11</td><td class="p-2">0.37</td><td class="p-2">272,630</td></tr>
+                                <tr><td class="p-2 font-medium">Erick</td><td class="p-2">136.20</td><td class="p-2">6.66</td><td class="p-2">0.50</td><td class="p-2">291,766</td></tr>
+                                <tr><td class="p-2 font-medium">Isra</td><td class="p-2">131.90</td><td class="p-2">11.00</td><td class="p-2">0.30</td><td class="p-2">370,400</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 8: Causas y Mejoras (Ishikawa) -->
+        <div id="slide-8" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">QC Story - Análisis de Variación</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Diagrama de Causa y Efecto (Ishikawa) y Mejoras</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+                <div class="bg-anahuac-dark p-5 rounded-xl border border-anahuac-border space-y-3">
+                    <h3 class="text-anahuac-gold font-bold text-sm"><i class="fa-solid fa-diagram-project mr-2"></i>Factores Identificados</h3>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li><strong class="text-anahuac-orange">Maquinaria:</strong> Altura de montaje del martillo sin estandarizar, aflojamiento de tuercas por balanceo y resistencia variable al giro.</li>
+                        <li><strong class="text-anahuac-orange">Método:</strong> Altura de liberación sin referencia fija y reapriete de tuercas al tanteo.</li>
+                        <li><strong class="text-anahuac-orange">Materiales / Mano de Obra:</strong> Diferencias entre pelotas y colocación variable entre tiradores.</li>
+                    </ul>
+                </div>
+                <div class="bg-anahuac-dark p-5 rounded-xl border border-anahuac-border space-y-3">
+                    <h3 class="text-anahuac-orange font-bold text-sm"><i class="fa-solid fa-check-to-slot mr-2"></i>Mejoras Implementadas</h3>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li>✔ Fijar el martillo en el nivel 3 (más alto).</li>
+                        <li>✔ Revisar y apretar tuercas cada 5 tiros.</li>
+                        <li>✔ Fijar la altura de liberación y marcar detenedor.</li>
+                        <li>✔ Marcar punto central para colocación uniforme de la pelota.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 9: Resultados Posteriores y Gráfica Moderna de Dispersión -->
+        <div id="slide-9" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Resultados Post-Mejora (200 registros)</span>
+                <h2 class="text-2xl font-bold text-white mt-1">Dispersión de Tiros por Tirador</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 items-center">
+                <div class="md:col-span-2 bg-anahuac-dark p-4 rounded-xl border border-anahuac-border h-[280px] flex items-center justify-center">
+                    <canvas id="dispersionChart"></canvas>
+                </div>
+                <div class="bg-anahuac-dark p-4 rounded-xl border border-anahuac-border space-y-2">
+                    <h3 class="text-anahuac-gold font-bold text-xs uppercase">Indicadores Post-Mejora</h3>
+                    <p class="text-xs text-gray-300">La mayoría de tiros se concentra entre 120 y 140 cm.</p>
+                    <div class="text-xs space-y-1 text-gray-300">
+                        <p><strong>Pedro:</strong> Media 129.85 | Desv: 4.25 | Cp: 0.79</p>
+                        <p><strong>Luis:</strong> Media 131.20 | Desv: 4.39 | Cp: 0.76</p>
+                        <p><strong>Jorge:</strong> Media 129.40 | Desv: 4.86 | Cp: 0.69</p>
+                        <p><strong>Isra:</strong> Media 131.12 | Desv: 5.21 | Cp: 0.64</p>
+                        <p><strong>Erick:</strong> Media 130.72 | Desv: 5.65 | Cp: 0.59</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 10: Gráfica de Distribución Normal Ajustada -->
+        <div id="slide-10" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Análisis Estadístico Comparativo</span>
+                <h2 class="text-2xl font-bold text-white mt-1">Distribución Normal Ajustada por Tirador</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 items-center">
+                <div class="md:col-span-2 bg-anahuac-dark p-4 rounded-xl border border-anahuac-border h-[280px] flex items-center justify-center">
+                    <canvas id="normalDistChart"></canvas>
+                </div>
+                <div class="bg-anahuac-dark p-4 rounded-xl border border-anahuac-border space-y-3">
+                    <h3 class="text-anahuac-gold font-bold text-xs uppercase">Observaciones Clave</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Las curvas normales muestran diferencias en el centro y la dispersión. Pedro presenta la menor desviación estándar (4.25 cm) y un promedio sumamente cercano a 130 cm.
+                    </p>
+                    <p class="text-xs text-anahuac-orange font-medium">Ningún tirador alcanzó aún la meta de Cp > 1.33.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 11: Preguntas Clave y Probabilidades -->
+        <div id="slide-11" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Preguntas y Respuestas del Análisis</span>
+                <h2 class="text-2xl font-bold text-white mt-1">Desviación, Probabilidad y Control</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-xs">
+                <div class="bg-anahuac-dark p-4 rounded-xl border border-anahuac-border space-y-2">
+                    <h3 class="text-anahuac-gold font-bold"><i class="fa-solid fa-circle-question mr-1"></i> 1 & 2. ¿Desviación vs Media y Mejor Tirador?</h3>
+                    <p class="text-gray-300">El promedio cercano no garantiza consistencia. <strong>Pedro</strong> es seleccionado por menor desviación (4.25 cm) y media óptima (129.85 cm).</p>
+                </div>
+                <div class="bg-anahuac-dark p-4 rounded-xl border border-anahuac-border space-y-2">
+                    <h3 class="text-anahuac-gold font-bold"><i class="fa-solid fa-circle-question mr-1"></i> 5. Probabilidad de tiros < 130 cm</h3>
+                    <div class="grid grid-cols-5 gap-1 text-center font-mono bg-black/40 p-2 rounded border border-anahuac-border">
+                        <div>Pedro<br><span class="text-anahuac-orange">51.41%</span></div>
+                        <div>Jorge<br><span class="text-anahuac-orange">54.92%</span></div>
+                        <div>Luis<br><span class="text-anahuac-orange">39.23%</span></div>
+                        <div>Erick<br><span class="text-anahuac-orange">44.90%</span></div>
+                        <div>Isra<br><span class="text-anahuac-orange">41.46%</span></div>
+                    </div>
+                </div>
+                <div class="bg-anahuac-dark p-4 rounded-xl border border-anahuac-border space-y-2 md:col-span-2">
+                    <h3 class="text-anahuac-gold font-bold"><i class="fa-solid fa-circle-question mr-1"></i> 6 & 7. ¿Cómo reducir la variación y lecciones aprendidas?</h3>
+                    <p class="text-gray-300">Estabilizar el apriete de tuercas con un sistema repetible, cambiar la alfombra a base plana y evaluar siempre con datos. Estar en especificación y tener Cp > 1.33 son objetivos distintos.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 12: Conclusión -->
+        <div id="slide-12" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-orange uppercase">Síntesis Final</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Conclusiones de la Práctica Golfito</h2>
+            </div>
+            
+            <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4 my-6">
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Aprendimos que no basta con que el promedio de los tiros esté cerca de 130 cm; necesitamos consistencia medida mediante la desviación estándar. El diagrama de Ishikawa permitió estandarizar condiciones clave como el apriete y la posición.
+                </p>
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Aunque Pedro obtuvo los resultados más consistentes, ninguno alcanzó la meta de <strong class="text-anahuac-gold">Cp > 1.33</strong>. El siguiente paso requiere mejorar la fijación mecánica y comprobar empíricamente cada mejora con datos cuantitativos.
+                </p>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="nextSlide()" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- DIAPOSITIVA 13: Referencias y Despedida -->
+        <div id="slide-13" class="slide-hidden flex-col w-full min-h-[600px] justify-between bg-anahuac-card rounded-2xl p-8 md:p-12 gold-border">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-anahuac-gold uppercase">Bibliografía y Cierre</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Referencias y Agradecimientos</h2>
+            </div>
+            
+            <div class="bg-anahuac-dark p-6 rounded-xl border border-anahuac-border space-y-4 my-6">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-anahuac-gold">Referencias</h3>
+                <p class="text-xs text-gray-300 leading-relaxed font-mono">
+                    Ackoff, R. L. (1989). From Data to Wisdom. Journal of Applied Systems Analysis, 16, 3–9; resumen en ISKO Encyclopedia of Knowledge Organization: DIKW · Rowley (2007) sobre las distintas definiciones, citado por University of Nebraska–Lincoln · Foto: Bkobres, dominio público, Wikimedia Commons.
+                </p>
+            </div>
+
+            <div class="text-center py-6 space-y-3">
+                <h3 class="text-2xl font-bold gold-gradient-text">¡Muchas Gracias por su Atención!</h3>
+                <p class="text-sm text-gray-400">Universidad Anáhuac Querétaro — Maestría en Ingeniería y Transformación</p>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevSlide()" class="px-4 py-2 bg-anahuac-dark hover:bg-anahuac-border text-xs font-semibold rounded-lg border border-anahuac-border text-gray-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Anterior
+                </button>
+                <button onclick="goToSlide(1)" class="px-4 py-2 bg-anahuac-orange hover:bg-anahuac-orangeHover text-xs font-semibold rounded-lg text-white transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-house"></i> Volver al Inicio
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER / CONTROLES INFERIORES -->
+    <footer class="w-full bg-anahuac-dark border-t border-anahuac-border py-3 px-6 md:px-12 flex justify-between items-center text-xs text-gray-400">
+        <p>Analítica para la Toma de Decisiones © 2026</p>
+        <div class="flex space-x-2">
+            <button onclick="prevSlide()" class="px-3 py-1 bg-anahuac-card hover:bg-anahuac-border border border-anahuac-border rounded text-gray-200 transition">Anterior</button>
+            <button onclick="nextSlide()" class="px-3 py-1 bg-anahuac-orange hover:bg-anahuac-orangeHover text-white rounded transition">Siguiente</button>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE CONTROL Y GRAFICAS -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 13;
+
+        function updateSlideView() {
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                if (i === currentSlide) {
+                    slide.classList.remove('slide-hidden');
+                    slide.classList.add('slide-active');
+                } else {
+                    slide.classList.remove('slide-active');
+                    slide.classList.add('slide-hidden');
+                }
+            }
+            document.getElementById('slide-counter').innerText = `Diapositiva ${currentSlide} / ${totalSlides}`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlideView();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlideView();
+            }
+        }
+
+        function goToSlide(slideNum) {
+            if (slideNum >= 1 && slideNum <= totalSlides) {
+                currentSlide = slideNum;
+                updateSlideView();
+            }
+        }
+
+        // Inicializar Gráficas con Chart.js
+        window.addEventListener('DOMContentLoaded', () => {
+            // Gráfica de Dispersión (Diapositiva 9)
+            const ctxDisp = document.getElementById('dispersionChart').getContext('2d');
+            new Chart(ctxDisp, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        { label: 'Pedro', data: [{x:5, y:130}, {x:10, y:132}, {x:15, y:128}, {x:20, y:131}, {x:25, y:129}, {x:30, y:132}], backgroundColor: '#3b82f6' },
+                        { label: 'Luis', data: [{x:5, y:130}, {x:10, y:128}, {x:15, y:145}, {x:20, y:130}, {x:25, y:132}, {x:30, y:128}], backgroundColor: '#84cc16' },
+                        { label: 'Jorge', data: [{x:5, y:126}, {x:10, y:116}, {x:15, y:130}, {x:20, y:125}, {x:25, y:129}, {x:30, y:131}], backgroundColor: '#ef4444' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#ffffff', font: { size: 10 } } }
+                    },
+                    scales: {
+                        x: { grid: { color: '#2e2e2e' }, ticks: { color: '#9ca3af' } },
+                        y: { min: 110, max: 150, grid: { color: '#2e2e2e' }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+
+            // Gráfica de Distribución Normal (Diapositiva 10)
+            const ctxNorm = document.getElementById('normalDistChart').getContext('2d');
+            new Chart(ctxNorm, {
+                type: 'line',
+                data: {
+                    labels: ['110', '115', '120', '125', '130', '135', '140', '145', '150'],
+                    datasets: [
+                        { label: 'Pedro', data: [0.001, 0.01, 0.05, 0.2, 0.4, 0.2, 0.05, 0.01, 0.001], borderColor: '#3b82f6', tension: 0.4 },
+                        { label: 'Luis', data: [0.0005, 0.005, 0.03, 0.15, 0.38, 0.18, 0.03, 0.005, 0.0005], borderColor: '#84cc16', tension: 0.4 },
+                        { label: 'Jorge', data: [0.002, 0.015, 0.07, 0.25, 0.35, 0.22, 0.07, 0.015, 0.002], borderColor: '#ef4444', tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#ffffff', font: { size: 10 } } }
+                    },
+                    scales: {
+                        x: { grid: { color: '#2e2e2e' }, ticks: { color: '#9ca3af' } },
+                        y: { grid: { color: '#2e2e2e' }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
